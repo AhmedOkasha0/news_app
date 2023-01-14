@@ -14,11 +14,6 @@ class Items {
 
     return [
       Items(
-          title: 'Bussines',
-          color: 0xffCF7E48,
-          imagePath: 'assets/images/bussines.png',
-          id: 'bussiness'),
-      Items(
           title: 'Entertainment',
           color: 0xff4882CF,
           imagePath: 'assets/images/environment.png',

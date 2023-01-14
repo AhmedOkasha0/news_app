@@ -10,7 +10,7 @@ class ApiManger {
     /// https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY
     var url = Uri.https(baseUrl, '/v2/top-headlines/sources',
         {'apiKey': '32ce8b31ef664c44b9566e064c93289e',
-          'country': categoryId
+          'category': categoryId
         });
     try {
       var response = await http.get(url);
@@ -23,11 +23,13 @@ class ApiManger {
     }
   }
 
-  static Future<NewsRewsponse> getNews(String sourceId) async {
+  static Future<NewsRewsponse> getNews({String? sourceId,String? searchKeyword}) async {
     ///https://newsapi.org /v2/everything ?q=bitcoin& apiKey=32ce8b31ef664c44b9566e064c93289e
 
     var url = Uri.https(baseUrl, '/v2/everything',
-        {'apiKey': '32ce8b31ef664c44b9566e064c93289e', 'sources': sourceId},);
+        {'apiKey': '32ce8b31ef664c44b9566e064c93289e', 'sources': sourceId,
+          'q':searchKeyword,
+        },);
     try {
       var response = await http.get(url);
       var bodyString = response.body;

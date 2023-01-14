@@ -4,6 +4,7 @@ import 'package:news_app/home/Category/Settings_tab.dart';
 import 'package:news_app/home/Category/category_detalis.dart';
 import 'package:news_app/home/Category/category_items.dart';
 import 'package:news_app/home/Category/items.dart';
+import 'package:news_app/home/Category/news_search.dart';
 import 'package:news_app/home/Category/tab_contanier.dart';
 import 'package:news_app/home/Home_drawer.dart';
 
@@ -26,6 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+            actions: [
+              IconButton(onPressed: (){
+                showSearch(context: context, delegate:NewsSearch(),
+                );
+              }, icon: Icon(Icons.search,size: 35,))
+            ],
           ),
           drawer: Drawer(
             child: HomeDrawer(onDrawerItemClick: onDrawerItemClick),

@@ -1,25 +1,39 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/api_manger.dart';
 import 'package:news_app/home/Category/news_items.dart';
+import 'package:news_app/home/Category/tab_contanier.dart';
 import 'package:news_app/model/NewsRewsponse.dart';
 import 'package:news_app/model/sourcesResponce.dart';
 import 'package:news_app/theme_app.dart';
 
-class NewsContanier extends StatelessWidget {
-  Source source;
-  NewsContanier({required this.source});
+class NewsSearch extends SearchDelegate{
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return[
+      IconButton(onPressed: (){
+        showResults(context);
+      }, icon: Icon(Icons.search,size: 25,))
+    ];
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(onPressed: (){
+      Navigator.of(context).pop();
+    }, icon: Icon(Icons.clear,size: 24,));
+
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
     return FutureBuilder<NewsRewsponse>(
-      future: ApiManger.getNews(sourceId: source.id ?? ''),
+      future: ApiManger.getNews(searchKeyword: query),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
               child: CircularProgressIndicator(
-            color: ThemeScreen.primaryColor,
-          ));
+                color: ThemeScreen.primaryColor,
+              ));
         } else if (snapshot.hasError) {
           return Column(
             children: [
@@ -45,5 +59,17 @@ class NewsContanier extends StatelessWidget {
         );
       },
     );
+
+
   }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Center(
+      child: Text(
+        'suggestions'
+      ),
+    );
+  }
+
 }

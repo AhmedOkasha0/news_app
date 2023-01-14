@@ -11,7 +11,7 @@ class CategoryDetalis extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SourcesResponce>(
-        future: ApiManger.getSources(items.id),
+        future: ApiManger.getSources(items.id ?? ''),
         builder: (contex, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(
